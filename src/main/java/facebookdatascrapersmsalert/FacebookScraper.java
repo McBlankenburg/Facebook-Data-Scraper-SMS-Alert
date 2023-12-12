@@ -1,18 +1,19 @@
 package facebookdatascrapersmsalert;
 
+
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.stereotype.Component;
 
-import java.util.Objects;
-
+@Component
+@Slf4j
 public class FacebookScraper {
 
     public static String scrapChristmasBallData() {
-        String chromedriverPath = Objects.requireNonNull(FacebookScraper.class.getClassLoader()
-                                                                        .getResource("chromedriver"))
-                                                                        .getPath();
+        String chromedriverPath = FacebookScraper.class.getClassLoader().getResource("chromedriver").getPath();
 
         System.setProperty("webdriver.chrome.driver", chromedriverPath);
         WebDriver driver = new ChromeDriver();
@@ -39,7 +40,7 @@ public class FacebookScraper {
                 scrappedData = elementToLocate.getText();
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
-                //todo: logger
+                log.info(e.getMessage() + e.getStackTrace().toString());
             }
             driver.quit();
 
