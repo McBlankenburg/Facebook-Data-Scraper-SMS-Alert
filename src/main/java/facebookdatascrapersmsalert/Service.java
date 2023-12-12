@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class Service {
 
-    @Scheduled(fixedRate = 500)
+    @Scheduled(fixedRateString = "${SCHEDULED_TIME}")
     public void run() {
         String DATE_TO_SCRAP = "Datę rozpoczęcia zapisów i płatności podamy już wkrótce!";
         if (!FacebookScraper.scrapChristmasBallData().equals(DATE_TO_SCRAP)) {
